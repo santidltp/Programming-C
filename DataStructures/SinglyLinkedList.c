@@ -24,6 +24,23 @@ void print_nodes(node *n){
 		printf("Number is: %d\n",n->number);
 	}
 }
+void delete_node(node *n, int num){
+
+	node *rmNode = (node*) malloc(sizeof(node));
+
+
+	while(n != NULL){
+	
+		if(n->next != NULL && n->next->number == num){
+			rmNode= n->next;
+			n->next = n->next->next;
+			break;
+		}
+		n=n->next;
+	}	
+	free(rmNode);
+	// return
+}
 int main(){
 	int i;
 	node *head= (node*) malloc(sizeof(node));
@@ -38,10 +55,21 @@ int main(){
       head=curr;
    }
 
-
-	
+   	printf("Everything:\n");
 	print_nodes(head);
-	
+	printf("Deleting 1:\n");
+	delete_node(head,1);
+	print_nodes(head);
+	printf("Deleting 5:\n");
+	delete_node(head,5);
+	print_nodes(head);
+	printf("Deleting 2:\n");
+	delete_node(head,2);
+	print_nodes(head);
+	printf("Deleting 3:\n");
+	delete_node(head,3);
+	print_nodes(head);
+
 
 node_free_all(head);
 // node_free_all(list);
