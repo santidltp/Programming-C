@@ -11,6 +11,7 @@ node *new_node(int num){
 	n->next=NULL;
 	return n;
 }
+
 void node_free_all(node *n){
 	if(n != NULL){
 		node_free_all(n->next);
@@ -19,7 +20,6 @@ void node_free_all(node *n){
 }
 void print_nodes(node *n){
 	if(n != NULL){
-		printf("%d\n",n->next->number);
 		print_nodes(n->next);
 		printf("Number is: %d\n",n->number);
 	}
@@ -27,22 +27,23 @@ void print_nodes(node *n){
 int main(){
 	int i;
 	node *head= (node*) malloc(sizeof(node));
-	node *list=NULL;//= (node*) malloc(sizeof(node));
-	//head=NULL;
-	list=head;
-	for(i=0; i<5;i++){
-		head = new_node(i+1);
-	}
-	for(i=0; i<5;i++){
-		printf("you number is: %d\n", list->number);
-		list=list->next;
-	}
+	node *curr;//= (node*) malloc(sizeof(node));
+	head=NULL;
 
-	// print_nodes(list);
-	// print_nodes(head);
+   head = NULL;
+
+   for(i=1;i<=10;i++) {
+      curr = new_node(i);
+      curr->next=head;
+      head=curr;
+   }
+
+
+	
+	print_nodes(head);
 	
 
 node_free_all(head);
-node_free_all(list);
+// node_free_all(list);
 return 0;
 }
