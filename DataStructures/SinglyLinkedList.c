@@ -20,50 +20,45 @@ void node_free_all(node *n){
 }
 void print_nodes(node *n){
 	if(n != NULL){
-		
 		print_nodes(n->next);
 		printf("Number is: %d\n",n->number);
 	}
 }
-void delete_node(node *n, int num){
+void delete_node(node **n, int num){
 
-	node *rmNode ;
-	node *tail=NULL;
+	node *rmNode;
+	node *current = (*n);
 
-
-	if( n!= NULL && n->number==num){
-		rmNode = (node*) malloc(sizeof(node));
-		rmNode = n;
-		n=n->next;
+	//delete first
+	if( current!= NULL && current->number==num){
+		rmNode = current;
+		current= current->next;
 		free(rmNode);
+		(*n)=current;
 	}
-
-	//all but last
-	while(n != NULL){
-		if(n->next != NULL && n->next->number == num){
-			//rmNode= (node*) malloc(sizeof(node));
-			rmNode= n->next;
-			n->next = rmNode->next;
-			free(rmNode);
-			break;
-		}
-		n=n->next;
-	}	
-	
-	// return
+	else{
+		//all but first
+		while(current != NULL){
+			if(current->next != NULL && current->next->number == num){
+				rmNode= current->next;
+				current->next = rmNode->next;
+				free(rmNode);
+				break;
+			}
+			current=current->next;
+		}	
+	}
 }
 int main(){
 	int i;
 	node *head= (node*) malloc(sizeof(node));
-	node *curr;//= (node*) malloc(sizeof(node));
+	node *current;
 	head=NULL;
 	
-    head = NULL;
-   head=curr;
    for(i=1;i<=10;i++) {
-      curr = new_node(i);
-      curr->next =head;
-      head=curr;
+      current = new_node(i);
+      current->next =head;
+      head=current;
 	}
 
 
@@ -71,22 +66,22 @@ int main(){
    	printf("Everything:\n");
 	print_nodes(head);
 	printf("Deleting 1:\n");
-	delete_node(head,1);
+	delete_node(&head,1);
 	print_nodes(head);
 	printf("Deleting 5:\n");
-	delete_node(head,5);
+	delete_node(&head,5);
 	print_nodes(head);
 	printf("Deleting 2:\n");
-	delete_node(head,2);
+	delete_node(&head,2);
 	print_nodes(head);
 	printf("Deleting 3:\n");
-	delete_node(head,3);
+	delete_node(&head,3);
 	print_nodes(head);
 	printf("Deleting 10:\n");
-	delete_node(head,10);
+	delete_node(&head,10);
 	print_nodes(head);
 	printf("Deleting 9:\n");
-	delete_node(head,9);
+	delete_node(&head,9);
 	print_nodes(head);
 
 node_free_all(head);
