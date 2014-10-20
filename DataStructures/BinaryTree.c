@@ -9,4 +9,10 @@ struct node{
 	node *right;
 };
 
-
+void delete_tree(node *leaf){
+	if(leaf!=NULL){
+		delete_tree(leaf->left);
+		delete_tree(leaf->right);
+		free(leaf);
+	}
+}
