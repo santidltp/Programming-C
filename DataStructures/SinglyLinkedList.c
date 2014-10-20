@@ -36,7 +36,6 @@ void delete_node(node **n, int num){
 		free(rmNode);
 		(*n)=current;
 	}
-	else{
 		//all but first
 		while(current != NULL){
 			if(current->next != NULL && current->next->number == num){
@@ -47,14 +46,15 @@ void delete_node(node **n, int num){
 			}
 			current=current->next;
 		}	
-	}
 }
 int main(){
 	int i;
 	node *head= (node*) malloc(sizeof(node));
 	node *current;
 	head=NULL;
-	
+	current=new_node(1);
+	current->next=head;
+	head=current;
    for(i=1;i<=10;i++) {
       current = new_node(i);
       current->next =head;
