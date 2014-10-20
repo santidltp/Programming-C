@@ -16,3 +16,16 @@ void delete_tree(node *leaf){
 		free(leaf);
 	}
 }
+
+void insert_node(node **leaf, int num){
+	if(leaf == NULL) {
+		*leaf = (node*)malloc(sizeof(node));
+		(*leaf)->number=num;
+		(*leaf)->left=NULL;
+		(*leaf)->right=NULL;
+	}	
+	else if((*leaf)->number < num) 
+			insert_node(&(*leaf)->left,num);
+	else if((*leaf)->number > num) 
+			insert_node(&(*leaf)->right,num);	
+}
