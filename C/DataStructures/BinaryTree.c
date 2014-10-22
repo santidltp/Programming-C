@@ -1,6 +1,7 @@
 #include <stdio.h>//for printing
 #include <stdlib>//for alloc calloc malloc realoc and free
 
+//Node of the tree
 typedef struct node node;
 struct node{
 	/* data */
@@ -8,7 +9,7 @@ struct node{
 	node *left;
 	node *right;
 };
-
+//Tree deletion function
 void delete_tree(node *leaf){
 	if(leaf!=NULL){
 		delete_tree(leaf->left);
@@ -16,7 +17,7 @@ void delete_tree(node *leaf){
 		free(leaf);
 	}
 }
-
+//incertion function
 void insert_node(node **leaf, int num){
 	if(leaf == NULL) {
 		*leaf = (node*)malloc(sizeof(node));
