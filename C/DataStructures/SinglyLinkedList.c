@@ -1,29 +1,33 @@
 #include <stdio.h>//prinf
 #include <stdlib.h>//alloc mallco callo
+//Node
 typedef struct node node;
  struct node{
 	int number;
 	node *next;
 };
+//Add new node
 node *new_node(int num){
 	node *n= (node*) malloc(sizeof(node));
 	n->number=num;
 	n->next=NULL;
 	return n;
 }
-
+//Free memory form all nodes
 void node_free_all(node *n){
 	if(n != NULL){
 		node_free_all(n->next);
 		free(n);
 	}
 }
+//print nodes from the LL
 void print_nodes(node *n){
 	if(n != NULL){
 		print_nodes(n->next);
 		printf("Number is: %d\n",n->number);
 	}
 }
+//Delete a specefic node
 void delete_node(node **n, int num){
 
 	node *rmNode;
